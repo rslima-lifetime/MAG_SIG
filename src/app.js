@@ -168,32 +168,39 @@ function renderWorkspace() {
 
   // Render Visão Geral (Standard Dashboard View)
   mainWorkspace.innerHTML = `
-    <!-- Top Profile & Health row -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      <div class="lg:col-span-4" id="profile-card-container"></div>
-      <div class="lg:col-span-5" id="health-score-container"></div>
-      <div class="lg:col-span-3" id="potencial-card-container"></div>
-    </div>
-    
-    <!-- Main 5 Dimensions Row -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 mt-6" id="dimensions-cards-container">
-      <div id="dim-resultado"></div>
-      <div id="dim-gestao"></div>
-      <div id="dim-desenvolvimento"></div>
-      <div id="dim-cultura"></div>
-      <div id="dim-risco"></div>
-    </div>
-    
-    <!-- Bottom History, Achievements, Feedback row -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <div id="historical-table-container"></div>
-      <div id="other-indicators-container"></div>
-      <div id="latest-achievements-container"></div>
-      <div id="hr-feedback-container"></div>
-    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
+      
+      <!-- Central/Main Column (col-span-9) -->
+      <div class="lg:col-span-9 space-y-6">
+        <!-- Top Profile & Health row -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-4" id="profile-card-container"></div>
+          <div class="lg:col-span-5" id="health-score-container"></div>
+          <div class="lg:col-span-3" id="potencial-card-container"></div>
+        </div>
+        
+        <!-- Main 5 Dimensions Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" id="dimensions-cards-container">
+          <div id="dim-resultado"></div>
+          <div id="dim-gestao"></div>
+          <div id="dim-desenvolvimento"></div>
+          <div id="dim-cultura"></div>
+          <div id="dim-risco"></div>
+        </div>
+        
+        <!-- Bottom History, Achievements, Feedback row -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div id="historical-table-container"></div>
+          <div id="other-indicators-container"></div>
+          <div id="latest-achievements-container"></div>
+          <div id="hr-feedback-container"></div>
+        </div>
+      </div>
+      
+      <!-- Right Sidebar Column: Retention Radar (col-span-3) -->
+      <div class="lg:col-span-3 lg:sticky lg:top-6" id="retention-radar-container"></div>
 
-    <!-- Retention Radar Row -->
-    <div class="mt-6" id="retention-radar-container"></div>
+    </div>
   `;
 
   // Render profile, health score, potential cards
