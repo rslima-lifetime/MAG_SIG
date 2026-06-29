@@ -18,7 +18,7 @@ import {
   renderHRFeedback
 } from './components/Tables.js';
 import { renderTeamAndJourney } from './components/Timeline.js';
-import { renderRetentionRadarCard, renderRetentionAlertList, showAlertDetailModal } from './components/RetentionRadar.js';
+import { renderRetentionRadarCard, renderRetentionAlertList, showAlertDetailModal, showRadarAllAlertsModal } from './components/RetentionRadar.js';
 import { initChatAgent } from './components/ChatAgent.js';
 import { renderDimensionWorkspace } from './components/DimensionWorkspace.js';
 
@@ -167,37 +167,28 @@ function renderWorkspace() {
 
   // Render Visão Geral (Standard Dashboard View)
   mainWorkspace.innerHTML = `
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
-      
-      <!-- Central/Main Column (col-span-9) -->
-      <div class="lg:col-span-9 space-y-6">
-        <!-- Top Profile & Health row -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-5" id="profile-card-container"></div>
-          <div class="lg:col-span-7" id="health-score-container"></div>
-        </div>
-        
-        <!-- Main 5 Dimensions Row -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" id="dimensions-cards-container">
-          <div id="dim-resultado"></div>
-          <div id="dim-gestao"></div>
-          <div id="dim-desenvolvimento"></div>
-          <div id="dim-cultura"></div>
-          <div id="dim-risco"></div>
-        </div>
-        
-        <!-- Bottom History, Achievements, Feedback row -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div id="historical-table-container"></div>
-          <div id="other-indicators-container"></div>
-          <div id="latest-achievements-container"></div>
-          <div id="hr-feedback-container"></div>
-        </div>
-      </div>
-      
-      <!-- Right Sidebar Column: Retention Radar (col-span-3) -->
-      <div class="lg:col-span-3 lg:sticky lg:top-6" id="retention-radar-container"></div>
-
+    <!-- Top Row: Profile, Health Score, Retention Radar -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div class="lg:col-span-4" id="profile-card-container"></div>
+      <div class="lg:col-span-5" id="health-score-container"></div>
+      <div class="lg:col-span-3" id="retention-radar-container"></div>
+    </div>
+    
+    <!-- Main 5 Dimensions Row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-6" id="dimensions-cards-container">
+      <div id="dim-resultado"></div>
+      <div id="dim-gestao"></div>
+      <div id="dim-desenvolvimento"></div>
+      <div id="dim-cultura"></div>
+      <div id="dim-risco"></div>
+    </div>
+    
+    <!-- Bottom History, Achievements, Feedback row -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      <div id="historical-table-container"></div>
+      <div id="other-indicators-container"></div>
+      <div id="latest-achievements-container"></div>
+      <div id="hr-feedback-container"></div>
     </div>
   `;
 
@@ -211,14 +202,14 @@ function renderWorkspace() {
   if (radarContainer) {
     radarContainer.innerHTML = renderRetentionRadarCard(state.alerts, state.selectedLeaderId, state.selectedProfile);
     
-    // Bind detail buttons inside the radar card
-    radarContainer.querySelectorAll('.btn-detail-alert').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    // Bind detail modal trigger
+    const btnRadarDetails = document.getElementById('btn-view-radar-details');
+    if (btnRadarDetails) {
+      btnRadarDetails.addEventListener('click', (e) => {
         e.stopPropagation();
-        const alertId = btn.getAttribute('data-alert-id');
-        showAlertDetailModal(alertId, state.alerts, state.selectedProfile);
+        showRadarAllAlertsModal(state.alerts, state.selectedLeaderId, state.selectedProfile);
       });
-    });
+    }
   }
 
   // Map and Render Dimension Cards
