@@ -1,0 +1,44 @@
+{
+  "Resultado": [
+    { "id": 4, "nome": "Resultado de vendas (ano)", "unidade": "R$", "fonte": "CRM Vendas / Salesforce", "regra": "Percentual de atingimento da meta de vendas acumulada no ano." },
+    { "id": 13, "nome": "Metas Individuais (corporativo)", "unidade": "%", "fonte": "SuccessFactors", "regra": "Média do atingimento das metas e KPOs corporativos individuais." },
+    { "id": 6, "nome": "Performance dos treinandos", "unidade": "Nota", "fonte": "BI Comercial", "regra": "Desempenho acadêmico e de vendas das turmas de treinandos liderados." },
+    { "id": 14, "nome": "Participação em projetos-chave", "unidade": "Projetos", "fonte": "PMO Corporativo", "regra": "Quantidade de projetos estratégicos com liderança ativa." },
+    { "id": 18, "nome": "Premiação em campanhas", "unidade": "Status", "fonte": "Marketing / Campanhas", "regra": "Destaque em campanhas anuais, com foco principal no prêmio Galo de Ouro." }
+  ],
+  "Gestao": [
+    { "id": 2, "nome": "Resultado do Ciclo de Gente", "unidade": "Matriz", "fonte": "Cornerstone", "regra": "Classificação no Ciclo de Gente (Cruzamento de Performance e Potencial)." },
+    { "id": 3, "nome": "Resultado da GPTW (histórico)", "unidade": "Nota", "fonte": "Portal GPTW", "regra": "Pontuação média obtida na avaliação de clima feita pela própria equipe." },
+    { "id": 8, "nome": "Turnover de equipe", "unidade": "%", "fonte": "ADP / Sênior", "regra": "Taxa de rotatividade acumulada no ano (Admissões + Desligamentos / 2) / Headcount." },
+    { "id": 5, "nome": "Treinandos por gestor", "unidade": "Pessoas", "fonte": "BI Comercial", "regra": "Número médio de treinandos sob supervisão direta do gestor (comercial)." },
+    { "id": 7, "nome": "Colaboradores-chave", "unidade": "Pessoas", "fonte": "Cornerstone", "regra": "Número de colaboradores classificados como talentos essenciais ou críticos na equipe." },
+    { "id": 12, "nome": "Sucessão", "unidade": "Prontos", "fonte": "Cornerstone", "regra": "Quantidade de colaboradores mapeados e prontos imediatamente para assumir a cadeira." },
+    { "id": 21, "nome": "Gestão de pessoas", "unidade": "%", "fonte": "Dimep / Sênior", "regra": "Conformidade no fechamento do cartão de ponto e programação de férias da equipe." }
+  ],
+  "Desenvolvimento": [
+    { "id": 10, "nome": "Treinamentos obrigatórios", "unidade": "%", "fonte": "MAG Universidade", "regra": "Adesão às trilhas obrigatórias e regulatórias vigentes na empresa." },
+    { "id": 16, "nome": "Treinamentos - MAG Univ.", "unidade": "Horas", "fonte": "MAG Universidade", "regra": "Total de horas de treinamentos livres concluídos na MAG Universidade no ano." },
+    { "id": 11, "nome": "Treinamentos de liderança", "unidade": "Horas", "fonte": "MAG Universidade", "regra": "Horas focadas exclusivamente em trilhas e programas de desenvolvimento gerencial." },
+    { "id": 17, "nome": "Histórico extracurricular", "unidade": "Status", "fonte": "ADP / Sênior", "regra": "Status de pós-graduações, MBAs, certificações técnicas ou cursos de extensão cadastrados." }
+  ],
+  "Cultura": [
+    { "id": 19, "nome": "Projetos internos", "unidade": "Participações", "fonte": "Gente & Gestão", "regra": "Presença em comitês, projetos internos como MAG Knows, Hackathons e Insurtech." },
+    { "id": 14, "nome": "Projetos-chave da companhia", "unidade": "Ativos", "fonte": "PMO Corporativo", "regra": "Participação ativa em frentes prioritárias do planejamento estratégico da MAG." },
+    { "id": 20, "nome": "Parecer de RH", "unidade": "Status", "fonte": "Gente & Gestão", "regra": "Parecer qualitativo registrado pela Business Partner da área (Favorável / Atenção)." }
+  ],
+  "Risco": [
+    { "id": 1, "nome": "Denúncias", "unidade": "Número", "fonte": "Canal de Ética / Compliance", "regra": "Quantidade de denúncias procedentes envolvendo assédio, fraude ou má conduta." },
+    { "id": 9, "nome": "Histórico de aprovações legais", "unidade": "%", "fonte": "Compliance / Jurídico", "regra": "Nível de conformidade em processos, alçadas e assinaturas legais da área." },
+    { "id": 10, "nome": "Treinamentos obrigatórios", "unidade": "%", "fonte": "Compliance / MAG Univ", "regra": "Nível de pendência em treinamentos exigidos por regulamentação legal (LGPD, PLD)." },
+    { "id": 8, "nome": "Turnover de equipe", "unidade": "%", "fonte": "ADP / Sênior", "regra": "Taxa de rotatividade que gera alerta crítico se estiver acima de 12% no ano." },
+    { "id": 20, "nome": "Parecer de RH", "unidade": "Status", "fonte": "Gente & Gestão", "regra": "Qualificativo de integridade ou risco emitido em parecer confidencial pela BP." }
+  ],
+  "Outros": [
+    { "id": 22, "nome": "Absenteísmo da equipe", "unidade": "%", "fonte": "ADP / Sênior", "regra": "Percentual de ausências e faltas injustificadas do time do gestor." },
+    { "id": 23, "nome": "Movimentação interna", "unidade": "Movimentações", "fonte": "ADP / Sênior", "regra": "Volume de promoções e transferências internas sob a gestão do líder." },
+    { "id": 24, "nome": "Tempo médio p/ preencher vagas", "unidade": "Dias", "fonte": "ADP / Sênior", "regra": "Duração média do processo seletivo para preenchimento de vagas sob a área." },
+    { "id": 25, "nome": "Engajamento nas avaliações", "unidade": "%", "fonte": "Cornerstone", "regra": "Percentual de adesão e envio das avaliações do Ciclo de Gente no time." },
+    { "id": 26, "nome": "Diversidade da equipe", "unidade": "%", "fonte": "ADP / Sênior", "regra": "Proporção de mulheres e grupos de diversidade liderados pela função." },
+    { "id": 27, "nome": "Retenção de talentos-chave", "unidade": "%", "fonte": "Cornerstone / ADP", "regra": "Taxa de retenção específica de colaboradores classificados como críticos." }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "leaders": {
+    "joao-silva": {
+      "timeline": [
+        { "ano": "2022", "promocoes": 0, "gptw": 78, "ciclo": "DC", "vendas": "19,2 MM", "denuncias": 0, "treinamentos": "38h" },
+        { "ano": "2023", "promocoes": 1, "gptw": 82, "ciclo": "DC", "vendas": "21,6 MM", "denuncias": 0, "treinamentos": "45h" },
+        { "ano": "2024", "promocoes": 0, "gptw": 85, "ciclo": "C Agir", "vendas": "25,1 MM", "denuncias": 0, "treinamentos": "66h" },
+        { "ano": "2025", "promocoes": 1, "gptw": 87, "ciclo": "C Agir", "vendas": "28,4 MM", "denuncias": 0, "treinamentos": "66h", "destaque": true }
+      ],
+      "conquistas": [
+        { "titulo": "Última promoção ou mérito", "data": "Mar/2024 (Promoção)", "icone": "award" },
+        { "titulo": "Premiação em campanhas", "data": "Galo de Ouro (2025)", "icone": "trophy" },
+        { "titulo": "Congressos / Cursos / MBA", "data": "Congresso CQCS (2025)", "icone": "book-open" },
+        { "titulo": "Projetos internos", "data": "Hackathon MAG (2025)", "icone": "cpu" }
+      ],
+      "parecerRH": {
+        "autor": "Carla Mendes",
+        "cargo": "Business Partner",
+        "data": "15/04/2025",
+        "conteudo": "João demonstra forte capacidade de entrega com foco em resultado e desenvolvimento do time. Líder colaborativo, com boa influência e alinhado aos valores da MAG. Recomendado para novos desafios de maior complexidade.",
+        "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face",
+        "nivelAcesso": "BP"
+      },
+      "liderados": [
+        { "id": "lid-1", "nome": "Ricardo Santos", "cargo": "Consultor de Vendas", "tempoCasa": "4 anos", "tempoCargo": "1 ano", "ultimaMovimentacao": "Promoção (Jan/2025)", "ciclo": "Alto Potencial", "treinamentos": "42h", "pdi": "Em dia", "projetos": "Projeto Otimização Comercial", "potencial": "Elevado", "parecer": "Demonstra maturidade técnica comercial, pronto para liderar pequenas células." },
+        { "id": "lid-2", "nome": "Mariana Costa", "cargo": "Assistente Comercial", "tempoCasa": "2 anos", "tempoCargo": "2 anos", "ultimaMovimentacao": "Admissão (Mar/2024)", "ciclo": "Médio Potencial", "treinamentos": "24h", "pdi": "Em dia", "projetos": "MAG Knows", "potencial": "Médio", "parecer": "Muito focada em processos, necessita desenvolver flexibilidade e negociação." }
+      ]
+    },
+    "ana-souza": {
+      "timeline": [
+        { "ano": "2022", "promocoes": 1, "gptw": 90, "ciclo": "A", "vendas": "45,2 MM", "denuncias": 0, "treinamentos": "52h" },
+        { "ano": "2023", "promocoes": 0, "gptw": 92, "ciclo": "A", "vendas": "52,8 MM", "denuncias": 0, "treinamentos": "60h" },
+        { "ano": "2024", "promocoes": 1, "gptw": 95, "ciclo": "A", "vendas": "64,1 MM", "denuncias": 0, "treinamentos": "72h" },
+        { "ano": "2025", "promocoes": 1, "gptw": 96, "ciclo": "A", "vendas": "72,3 MM", "denuncias": 0, "treinamentos": "80h", "destaque": true }
+      ],
+      "conquistas": [
+        { "titulo": "Última promoção ou mérito", "data": "Jan/2025 (Promoção)", "icone": "award" },
+        { "titulo": "Campanhas / Premiações", "data": "Galo de Ouro Master (2024)", "icone": "trophy" },
+        { "titulo": "MBA / Certificação", "data": "MBA Gestão de Vendas - FGV", "icone": "book-open" },
+        { "titulo": "Iniciativas Internas", "data": "Mentora no Hackathon MAG", "icone": "cpu" }
+      ],
+      "parecerRH": {
+        "autor": "Roberto Dias",
+        "cargo": "BP Sênior",
+        "data": "20/05/2025",
+        "conteudo": "Ana é uma das principais lideranças comerciais da companhia. Possui alta capacidade analítica, energia contagiante e lidera pelo exemplo. Sucessora mapeada para a Diretoria Executiva Comercial.",
+        "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+        "nivelAcesso": "RH"
+      },
+      "liderados": [
+        { "id": "lid-3", "nome": "Lucas Lima", "cargo": "Gerente de Contas", "tempoCasa": "5 anos", "tempoCargo": "2 anos", "ultimaMovimentacao": "Mérito (Jul/2024)", "ciclo": "Alto Potencial", "treinamentos": "66h", "pdi": "Em dia", "projetos": "Insurtech MAG", "potencial": "Elevado", "parecer": "Excelente relacionamento institucional, performando consistentemente acima da meta." }
+      ]
+    },
+    "carlos-lima": {
+      "timeline": [
+        { "ano": "2022", "promocoes": 0, "gptw": 72, "ciclo": "DC", "vendas": "N/A", "denuncias": 0, "treinamentos": "12h" },
+        { "ano": "2023", "promocoes": 1, "gptw": 70, "ciclo": "DC", "vendas": "N/A", "denuncias": 1, "treinamentos": "24h" },
+        { "ano": "2024", "promocoes": 0, "gptw": 65, "ciclo": "C Agir", "vendas": "N/A", "denuncias": 0, "treinamentos": "30h" },
+        { "ano": "2025", "promocoes": 0, "gptw": 70, "ciclo": "C Agir", "vendas": "N/A", "denuncias": 0, "treinamentos": "42h" }
+      ],
+      "conquistas": [
+        { "titulo": "Última promoção ou mérito", "data": "Mai/2024 (Mérito)", "icone": "award" },
+        { "titulo": "Projetos internos", "data": "Implementação ERP Backoffice", "icone": "cpu" }
+      ],
+      "parecerRH": {
+        "autor": "Juliana Neves",
+        "cargo": "Business Partner",
+        "data": "10/06/2025",
+        "conteudo": "Carlos entrega bons resultados operacionais, porém o clima da equipe requer atenção. Há relatos de microgestão e desmotivação dos liderados, refletidos no turnover de 14%. Recomenda-se acompanhamento e treinamento focado em liderança empática e delegação.",
+        "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
+        "nivelAcesso": "BP"
+      },
+      "liderados": [
+        { "id": "lid-4", "nome": "Felipe Ramos", "cargo": "Analista de Sinistros Sr", "tempoCasa": "3 anos", "tempoCargo": "1 ano", "ultimaMovimentacao": "Promoção (Nov/2024)", "ciclo": "Médio Potencial", "treinamentos": "18h", "pdi": "Pendente", "projetos": "Nenhum", "potencial": "Médio", "parecer": "Profissional técnico excelente, mas demonstra sinais de estresse devido à carga de cobranças." }
+      ]
+    },
+    "patricia-alves": {
+      "timeline": [
+        { "ano": "2023", "promocoes": 1, "gptw": 88, "ciclo": "A", "vendas": "N/A", "denuncias": 0, "treinamentos": "48h" },
+        { "ano": "2024", "promocoes": 0, "gptw": 90, "ciclo": "A", "vendas": "N/A", "denuncias": 0, "treinamentos": "66h" },
+        { "ano": "2025", "promocoes": 1, "gptw": 90, "ciclo": "A", "vendas": "N/A", "denuncias": 0, "treinamentos": "84h", "destaque": true }
+      ],
+      "conquistas": [
+        { "titulo": "Última promoção ou mérito", "data": "Set/2024 (Promoção)", "icone": "award" },
+        { "titulo": "MBA / Congressos", "data": "MBA em Arquitetura de TI (2025)", "icone": "book-open" },
+        { "titulo": "Projetos Corporativos", "data": "Migração Nuvem Core MAG (2025)", "icone": "cpu" }
+      ],
+      "parecerRH": {
+        "autor": "Eduardo Castro",
+        "cargo": "Business Partner TI",
+        "data": "02/05/2025",
+        "conteudo": "Patricia realiza uma gestão técnica exemplar. O time possui 0% de turnover voluntário, alta sinergia e engajamento. Ela necessita apenas de mais exposição em fóruns executivos de negócio para acelerar sua transição para gerente.",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
+        "nivelAcesso": "BP"
+      },
+      "liderados": [
+        { "id": "lid-5", "nome": "Gustavo Nogueira", "cargo": "Engenheiro de Software Sr", "tempoCasa": "2 anos", "tempoCargo": "1 ano", "ultimaMovimentacao": "Promoção (Dez/2024)", "ciclo": "Alto Potencial", "treinamentos": "60h", "pdi": "Em dia", "projetos": "Nuvem Core", "potencial": "Elevado", "parecer": "Liderança técnica natural, forte referência em inovação arquitetural dentro da equipe." }
+      ]
+    },
+    "joao-ribeiro": {
+      "timeline": [
+        { "ano": "2022", "promocoes": 1, "gptw": 80, "ciclo": "DC", "vendas": "18,4 MM", "denuncias": 0, "treinamentos": "24h" },
+        { "ano": "2023", "promocoes": 0, "gptw": 78, "ciclo": "DC", "vendas": "20,1 MM", "denuncias": 0, "treinamentos": "30h" },
+        { "ano": "2024", "promocoes": 0, "gptw": 72, "ciclo": "C Agir", "vendas": "23,2 MM", "denuncias": 2, "treinamentos": "30h" },
+        { "ano": "2025", "promocoes": 0, "gptw": 75, "ciclo": "C Agir", "vendas": "24,5 MM", "denuncias": 1, "treinamentos": "36h" }
+      ],
+      "conquistas": [
+        { "titulo": "Última promoção ou mérito", "data": "Dez/2023 (Mérito)", "icone": "award" },
+        { "titulo": "Premiações Comerciais", "data": "Campanha Galo de Ouro Regional", "icone": "trophy" }
+      ],
+      "parecerRH": {
+        "autor": "Canal de Integridade",
+        "cargo": "Compliance / RH Especial",
+        "data": "22/04/2025",
+        "conteudo": "Líder sob plano de monitoramento especial devido a denúncias de postura inadequada e assédio moral recebidas pelo canal confidencial. Uma denúncia foi considerada procedente em auditoria interna e medidas pedagógicas e administrativas foram tomadas. Situação em acompanhamento direto pelo comitê de compliance da MAG.",
+        "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop&crop=face",
+        "nivelAcesso": "Compliance"
+      },
+      "liderados": [
+        { "id": "lid-6", "nome": "Bruno Reis", "cargo": "Supervisor Comercial", "tempoCasa": "6 anos", "tempoCargo": "3 anos", "ultimaMovimentacao": "Nenhuma recente", "ciclo": "Médio Potencial", "treinamentos": "12h", "pdi": "Pendente", "projetos": "Nenhum", "potencial": "Estável", "parecer": "Profissional experiente, mas demonstra insatisfação com as diretrizes e clima da regional comercial." }
+      ]
+    }
+  }
+}
