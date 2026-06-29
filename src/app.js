@@ -6,7 +6,6 @@ import { renderHeader } from './components/Header.js';
 import { renderSidebar } from './components/Sidebar.js';
 import {
   renderProfileCard,
-  renderPotencialCard,
   renderDimensionCard,
   renderDimensionSummaryCard,
   renderDimensionExpandedCard
@@ -174,9 +173,8 @@ function renderWorkspace() {
       <div class="lg:col-span-9 space-y-6">
         <!-- Top Profile & Health row -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-4" id="profile-card-container"></div>
-          <div class="lg:col-span-5" id="health-score-container"></div>
-          <div class="lg:col-span-3" id="potencial-card-container"></div>
+          <div class="lg:col-span-5" id="profile-card-container"></div>
+          <div class="lg:col-span-7" id="health-score-container"></div>
         </div>
         
         <!-- Main 5 Dimensions Row -->
@@ -203,11 +201,10 @@ function renderWorkspace() {
     </div>
   `;
 
-  // Render profile, health score, potential cards
+  // Render profile, health score cards
   const isYearDestaque = journey.timeline.find(t => t.ano === state.referencePeriod)?.destaque || false;
   renderProfileCard(leader, isYearDestaque);
   renderHealthScore(leader.scoreGeral, leader.scoresPorDimensao);
-  renderPotencialCard(leader);
 
   // Render Retention Radar Card
   const radarContainer = document.getElementById('retention-radar-container');

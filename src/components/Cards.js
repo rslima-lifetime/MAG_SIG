@@ -6,8 +6,13 @@ export function renderProfileCard(leader, isDestaque) {
   const container = document.getElementById('profile-card-container');
   if (!container) return;
 
+  const potentialColorClass = leader.potencialSigla === 'A' 
+    ? 'bg-emerald-50 text-emerald-700 border-emerald-200/50' 
+    : 'bg-amber-50 text-amber-700 border-amber-200/50';
+  const dotColorClass = leader.potencialSigla === 'A' ? 'bg-emerald-500' : 'bg-amber-500';
+
   const html = `
-    <div class="flex flex-col bg-white p-5 rounded-xl border border-slate-200 shadow-sm h-full justify-between relative overflow-hidden">
+    <div class="flex flex-col bg-white p-5 rounded-xl border border-slate-200 shadow-sm h-full justify-between relative overflow-hidden animate-fade-in">
       <!-- Top Row: Avatar and Main Info -->
       <div class="flex items-center gap-4 shrink-0">
         <img 
@@ -16,9 +21,20 @@ export function renderProfileCard(leader, isDestaque) {
           class="w-16 h-16 rounded-full object-cover border border-slate-200 shadow-sm shrink-0"
           onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'"
         />
-        <div class="min-w-0">
-          <h2 class="text-lg font-bold text-mag-dark truncate leading-tight">${leader.nome}</h2>
-          <p class="text-xs font-semibold text-slate-500 mt-0.5 leading-snug">${leader.cargo}</p>\n          <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5 truncate">${leader.area}</p>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-base sm:text-lg font-black text-mag-dark truncate leading-tight">${leader.nome}</h2>
+            <!-- Potential Badge -->
+            <div class="flex items-center gap-1 shrink-0 ${potentialColorClass} px-2 py-0.5 rounded border text-[9px] font-black uppercase tracking-wider">
+              <span class="w-1.5 h-1.5 rounded-full ${dotColorClass}"></span>
+              <span>${leader.potencialSigla} • ${leader.potencial}</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
+            <p class="text-xs font-semibold text-slate-500 leading-snug">${leader.cargo}</p>
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-200 flex items-center justify-center shrink-0 w-1 h-1"></span>
+            <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider truncate">${leader.area}</p>
+          </div>
         </div>
       </div>
       
@@ -26,9 +42,9 @@ export function renderProfileCard(leader, isDestaque) {
       <div class="border-t border-slate-100 my-2 shrink-0"></div>
       
       <!-- Bottom Grid: Stats (2 vertical blocks side-by-side) -->
-      <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-[11px] flex-1">
+      <div class="grid grid-cols-2 gap-x-4 gap-y-2.5 text-[11px] flex-1">
         <!-- Left Block: Times -->
-        <div class="flex flex-col gap-2.5 min-w-0">
+        <div class="flex flex-col gap-2 min-w-0">
           <div class="flex items-start gap-1.5 min-w-0">
             <i data-lucide="clock" class="w-4 h-4 text-sky-900 shrink-0 mt-0.5"></i>
             <div class="min-w-0">
@@ -46,7 +62,7 @@ export function renderProfileCard(leader, isDestaque) {
         </div>
         
         <!-- Right Block: Reporting & Team -->
-        <div class="flex flex-col gap-2.5 min-w-0">
+        <div class="flex flex-col gap-2 min-w-0">
           <div class="flex items-start gap-1.5 min-w-0">
             <i data-lucide="user-check" class="w-4 h-4 text-sky-900 shrink-0 mt-0.5"></i>
             <div class="min-w-0">
@@ -63,10 +79,29 @@ export function renderProfileCard(leader, isDestaque) {
           </div>
         </div>
       </div>
+
+      <!-- Succession Link & Readiness Footer -->
+      <div class="border-t border-slate-100 pt-2 mt-2 shrink-0 flex items-center justify-between gap-2">
+        <button id="btn-view-succession" class="text-[10px] font-bold text-sky-600 hover:text-sky-800 flex items-center gap-1 hover:underline focus:outline-none">
+          <i data-lucide="users" class="w-3.5 h-3.5"></i>
+          Ver mapeamento de sucessão
+        </button>
+        <span class="text-[9px] text-slate-400 italic font-medium truncate">Prontidão: ${leader.prontidao}</span>
+      </div>
     </div>
   `;
 
   container.innerHTML = html;
+
+  // Bind Succession link events inside the new profile card
+  const btnSuccession = document.getElementById('btn-view-succession');
+  if (btnSuccession) {
+    btnSuccession.addEventListener('click', () => {
+      const tabBtn = document.querySelector('button[data-tab="team"]');
+      if (tabBtn) tabBtn.click();
+    });
+  }
+
   if (window.lucide) window.lucide.createIcons();
 }
 
