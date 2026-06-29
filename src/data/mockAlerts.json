@@ -1,0 +1,65 @@
+[
+  {
+    "id": "alert-001",
+    "leaderId": "joao-silva",
+    "pillar": "Gestão de Pessoas",
+    "alertType": "Turnover",
+    "title": "Turnover acima da referência",
+    "description": "O time apresenta turnover acima do parâmetro definido para o grupo comparável.",
+    "severity": "Prioridade",
+    "evidence": [
+      "Turnover do time acima da referência",
+      "Saídas voluntárias recentes",
+      "Maior concentração de saídas no primeiro ano"
+    ],
+    "suggestedAction": "Validar contexto com BP e liderança responsável. Avaliar plano de retenção e conversas de desenvolvimento.",
+    "source": "Base de headcount, turnover e entrevistas de desligamento",
+    "period": "2025",
+    "sensitivityLevel": "Alta",
+    "accessProfile": ["RH", "BP", "Diretor"],
+    "status": "Ativo",
+    "createdAt": "2025-12-01",
+    "updatedAt": "2025-12-15"
+  },
+  {
+    "id": "alert-002",
+    "leaderId": "joao-silva",
+    "pillar": "Cultura",
+    "alertType": "Clima",
+    "title": "Queda em indicador de clima",
+    "description": "Foi identificada queda no indicador de clima associado ao grupo liderado.",
+    "severity": "Atenção",
+    "evidence": [
+      "Queda no indicador de clima",
+      "Necessidade de aprofundamento qualitativo"
+    ],
+    "suggestedAction": "Analisar comentários consolidados e validar ações preventivas com Gente & Gestão.",
+    "source": "GPTW ou pesquisa interna de clima",
+    "period": "2025",
+    "sensitivityLevel": "Alta",
+    "accessProfile": ["RH", "BP"],
+    "status": "Ativo",
+    "createdAt": "2025-12-01",
+    "updatedAt": "2025-12-15"
+  },
+  {
+    "id": "alert-003",
+    "leaderId": "joao-silva",
+    "pillar": "Risco & Compliance",
+    "alertType": "Governança",
+    "title": "Informação sensível com acesso restrito",
+    "description": "Existe informação sensível relacionada ao pilar de Risco & Compliance.",
+    "severity": "Crítico",
+    "evidence": [
+      "Detalhes disponíveis apenas para perfis autorizados"
+    ],
+    "suggestedAction": "Acionar perfil autorizado de Gente & Gestão para análise.",
+    "source": "Fonte restrita",
+    "period": "2025",
+    "sensitivityLevel": "Restrita",
+    "accessProfile": ["RH"],
+    "status": "Ativo",
+    "createdAt": "2025-12-01",
+    "updatedAt": "2025-12-15"
+  }
+]

@@ -112,7 +112,7 @@ export function renderPotencialCard(leader, isDestaque) {
   if (window.lucide) window.lucide.createIcons();
 }
 
-export function renderDimensionCard(dimensionId, title, colorClass, indicators, score, showRiscoSensitive, hideHeaderAndFooter = false) {
+export function renderDimensionCard(dimensionId, title, colorClass, indicators, score, showRiscoSensitive, hideHeaderAndFooter = false, worstAlertSeverity = 'Baixo') {
   // Generates SVG Sparkline graph dynamically
   const generateSparkline = (points) => {
     const width = 120;
@@ -212,8 +212,7 @@ export function renderDimensionCard(dimensionId, title, colorClass, indicators, 
 
     return `
       <div class="flex items-start justify-between py-2 border-b border-slate-100 text-[10px] md:text-[11px] leading-tight gap-2">
-        <div class="flex-1 flex gap-1.5 min-w-0 pr-1">
-          <span class="font-bold text-slate-400 shrink-0 w-4">${ind.id}</span>
+        <div class="flex-1 flex min-w-0 pr-1">
           <span class="text-slate-600 font-medium break-words whitespace-normal" title="${ind.nome}">${ind.nome}</span>
         </div>
         <div class="flex items-center gap-1.5 text-right shrink-0">
@@ -238,7 +237,10 @@ export function renderDimensionCard(dimensionId, title, colorClass, indicators, 
   const headerHtml = hideHeaderAndFooter ? '' : `
     <!-- Header -->
     <div class="${headerBg} text-white px-3 py-2 md:px-4 md:py-2.5 flex items-center justify-between shadow-sm shrink-0">
-      <h4 class="text-[10px] md:text-xs font-bold uppercase tracking-wider">${title}</h4>
+      <div class="flex items-center gap-2">
+        <h4 class="text-[10px] md:text-xs font-bold uppercase tracking-wider">${title}</h4>
+        ${worstAlertSeverity && worstAlertSeverity !== 'Baixo' ? `<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider border ${worstAlertSeverity === 'Crítico' ? 'bg-red-500 text-white border-red-600' : worstAlertSeverity === 'Prioridade' ? 'bg-orange-500 text-white border-orange-600' : 'bg-amber-400 text-slate-900 border-amber-500'}">! Alerta</span>` : ''}
+      </div>
       <i data-lucide="${colorClass === 'blue' ? 'trending-up' : colorClass === 'teal' ? 'users' : colorClass === 'purple' ? 'graduation-cap' : colorClass === 'orange' ? 'heart' : 'shield-alert'}" class="w-4 h-4 opacity-80"></i>
     </div>
   `;
@@ -270,7 +272,7 @@ export function renderDimensionCard(dimensionId, title, colorClass, indicators, 
   `;
 }
 
-export function renderDimensionSummaryCard(dimensionId, title, colorClass, score) {
+export function renderDimensionSummaryCard(dimensionId, title, colorClass, score, worstAlertSeverity = 'Baixo') {
   const isInsuficiente = score === null;
   const displayScore = isInsuficiente ? 'Dados insuficientes' : `${score} <span class="text-[10px] text-slate-400 font-normal">de 100</span>`;
 
@@ -320,7 +322,10 @@ export function renderDimensionSummaryCard(dimensionId, title, colorClass, score
     <div class="dimension-summary-card flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden p-4 justify-between h-[125px] transition-all hover:translate-y-[-2px] hover:shadow-md cursor-pointer group" data-target-tab="${dimensionId.toLowerCase()}" data-dimension-id="${dimensionId}">
       <div class="flex items-start justify-between">
         <div class="min-w-0 flex-1 pr-2">
-          <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">${title.split('. ')[1] || title}</h4>
+          <div class="flex items-center gap-1.5 min-w-0">
+            <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">${title.split('. ')[1] || title}</h4>
+            ${worstAlertSeverity !== 'Baixo' ? `<span class="w-1.5 h-1.5 rounded-full ${worstAlertSeverity === 'Crítico' ? 'bg-red-500' : worstAlertSeverity === 'Prioridade' ? 'bg-orange-500' : 'bg-amber-500'} animate-pulse shrink-0"></span>` : ''}
+          </div>
           <p class="text-lg font-black mt-1.5 ${isInsuficiente ? 'text-slate-400 italic font-medium' : themeText}">${displayScore}</p>
         </div>
         <div class="p-2 rounded-lg ${themeBg} ${themeText} shrink-0 group-hover:scale-105 transition-transform">
@@ -341,7 +346,7 @@ export function renderDimensionSummaryCard(dimensionId, title, colorClass, score
   `;
 }
 
-export function renderDimensionExpandedCard(dimensionId, title, colorClass, indicators, score, showRiscoSensitive) {
+export function renderDimensionExpandedCard(dimensionId, title, colorClass, indicators, score, showRiscoSensitive, worstAlertSeverity = 'Baixo') {
   const isInsuficiente = score === null;
   const displayScore = isInsuficiente ? 'Dados insuficientes' : `${score} <span class="text-[10px] text-slate-400 font-normal">de 100</span>`;
 
@@ -435,7 +440,10 @@ export function renderDimensionExpandedCard(dimensionId, title, colorClass, indi
       <!-- Header -->
       <div class="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50 shrink-0 cursor-pointer hover:bg-slate-100/80 transition-colors">
         <div class="min-w-0 flex-1 pr-2">
-          <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">${title.split('. ')[1] || title}</h4>
+          <div class="flex items-center gap-2">
+            <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider truncate">${title.split('. ')[1] || title}</h4>
+            ${worstAlertSeverity && worstAlertSeverity !== 'Baixo' ? `<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider border ${worstAlertSeverity === 'Crítico' ? 'bg-red-500 text-white border-red-600' : worstAlertSeverity === 'Prioridade' ? 'bg-orange-500 text-white border-orange-600' : 'bg-amber-400 text-slate-900 border-amber-500'}">! Alerta</span>` : ''}
+          </div>
           <p class="text-base font-black mt-0.5 ${isInsuficiente ? 'text-slate-400 italic font-medium' : themeText}">${displayScore}</p>
         </div>
         <div class="p-2 rounded-lg ${themeBg} ${themeText} shrink-0">

@@ -19,6 +19,7 @@ import {
   renderHRFeedback
 } from './components/Tables.js';
 import { renderTeamAndJourney } from './components/Timeline.js';
+import { renderRetentionRadarCard, renderRetentionAlertList, showAlertDetailModal } from './components/RetentionRadar.js';
 
 // Application State
 let state = {
@@ -26,6 +27,7 @@ let state = {
   team: {},
   journey: {},
   indicators: {},
+  alerts: [],
   selectedLeaderId: 'joao-silva',
   referencePeriod: '2025',
   selectedProfile: 'RH',
@@ -44,6 +46,7 @@ async function initDatabase() {
       state.team = db.team;
       state.journey = db.journey;
       state.indicators = db.indicators;
+      state.alerts = db.alerts || [];
       console.log('Database loaded from localStorage.');
       return;
     } catch (e) {
@@ -53,17 +56,19 @@ async function initDatabase() {
 
   // Fetch standard default JSONs in parallel
   try {
-    const [resLeaders, resTeam, resJourney, resIndicators] = await Promise.all([
+    const [resLeaders, resTeam, resJourney, resIndicators, resAlerts] = await Promise.all([
       fetch('./src/data/mockLeadership.json').then(r => r.json()),
       fetch('./src/data/mockTeam.json').then(r => r.json()),
       fetch('./src/data/mockJourney.json').then(r => r.json()),
-      fetch('./src/data/mockIndicators.json').then(r => r.json())
+      fetch('./src/data/mockIndicators.json').then(r => r.json()),
+      fetch('./src/data/mockAlerts.json').then(r => r.json()).catch(() => [])
     ]);
 
     state.leaders = resLeaders;
     state.team = resTeam;
     state.journey = resJourney;
     state.indicators = resIndicators;
+    state.alerts = resAlerts;
 
     // Save to localStorage
     saveToLocalStorage();
@@ -79,7 +84,8 @@ function saveToLocalStorage() {
     leaders: state.leaders,
     team: state.team,
     journey: state.journey,
-    indicators: state.indicators
+    indicators: state.indicators,
+    alerts: state.alerts
   };
   localStorage.setItem('mag_gente_360_db', JSON.stringify(db));
 }
@@ -101,6 +107,14 @@ function renderWorkspace() {
 
   const mainWorkspace = document.getElementById('dashboard-workspace');
   if (!mainWorkspace) return;
+
+  const getPillarWorstSeverity = (pillarAlerts) => {
+    if (pillarAlerts.length === 0) return 'Baixo';
+    if (pillarAlerts.some(a => a.severity === 'Crítico')) return 'Crítico';
+    if (pillarAlerts.some(a => a.severity === 'Prioridade')) return 'Prioridade';
+    if (pillarAlerts.some(a => a.severity === 'Atenção')) return 'Atenção';
+    return 'Baixo';
+  };
 
   // Governance Flags
   const showHRFeedbackSensitive = state.selectedProfile === 'RH' || state.selectedProfile === 'BP';
@@ -137,11 +151,59 @@ function renderWorkspace() {
       const processedIndicators = mapIndicatorsValues(rawIndicators, team, leader, journey);
       const score = leader.scoresPorDimensao[dimensionKey];
 
+      // Get alerts for the pillar
+      const pillarAlerts = state.alerts.filter(a => a.leaderId === state.selectedLeaderId && a.status === 'Ativo' && a.pillar === cardTitle);
+      const worstSeverity = getPillarWorstSeverity(pillarAlerts);
+
+      let alertsSectionHtml = '';
+      if (dimensionKey === 'Gestao' || dimensionKey === 'Desenvolvimento' || dimensionKey === 'Cultura' || dimensionKey === 'Risco' || pillarAlerts.length > 0) {
+        let sectionTitle = 'Sinais de Atenção';
+        if (dimensionKey === 'Gestao') sectionTitle = 'Sinais de Retenção';
+        else if (dimensionKey === 'Cultura') sectionTitle = 'Sinais de Clima e Engajamento';
+        else if (dimensionKey === 'Risco') sectionTitle = 'Sinais Sensíveis e Governança';
+        else if (dimensionKey === 'Desenvolvimento') sectionTitle = 'Sinais de Desenvolvimento';
+
+        const listHtml = renderRetentionAlertList(pillarAlerts, cardTitle, state.selectedProfile);
+
+        alertsSectionHtml = `
+          <div class="mt-6 bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-fade-in text-slate-700">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+              <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="bell" class="w-3.5 h-3.5 text-sky-500"></i>
+                <span>${sectionTitle}</span>
+              </h3>
+              ${worstSeverity && worstSeverity !== 'Baixo' ? `<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider border ${worstSeverity === 'Crítico' ? 'bg-red-100 text-red-800 border-red-200' : worstSeverity === 'Prioridade' ? 'bg-orange-100 text-orange-800 border-orange-200' : 'bg-amber-100 text-amber-800 border-amber-200'}">${worstSeverity}</span>` : ''}
+            </div>
+            ${listHtml}
+          </div>
+        `;
+      }
+
       mainWorkspace.innerHTML = `
-        <div class="max-w-xl mx-auto animate-fade-in" id="focused-dimension-container"></div>
+        <div class="max-w-xl mx-auto flex flex-col gap-1 animate-fade-in" id="focused-dimension-container">
+          <div id="focused-card-placeholder"></div>
+          <div id="focused-alerts-placeholder"></div>
+        </div>
       `;
-      const focusedContainer = document.getElementById('focused-dimension-container');
-      focusedContainer.innerHTML = renderDimensionCard(dimensionKey, cardTitle, colorClass, processedIndicators, score, showRiscoSensitive);
+      
+      const focusedCardPlaceholder = document.getElementById('focused-card-placeholder');
+      focusedCardPlaceholder.innerHTML = renderDimensionCard(dimensionKey, cardTitle, colorClass, processedIndicators, score, showRiscoSensitive, false, worstSeverity);
+      
+      if (alertsSectionHtml) {
+        const alertsPlaceholder = document.getElementById('focused-alerts-placeholder');
+        alertsPlaceholder.innerHTML = alertsSectionHtml;
+        
+        // Bind detail buttons inside the alerts list
+        alertsPlaceholder.querySelectorAll('.btn-detail-alert').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const alertId = btn.getAttribute('data-alert-id');
+            showAlertDetailModal(alertId, state.alerts, state.selectedProfile);
+          });
+        });
+      }
+      
+      if (window.lucide) window.lucide.createIcons();
       return;
     }
 
@@ -165,8 +227,11 @@ function renderWorkspace() {
       <div class="lg:col-span-3" id="potencial-card-container"></div>
     </div>
     
+    <!-- Retention Radar Row -->
+    <div class="mt-6" id="retention-radar-container"></div>
+    
     <!-- Main 5 Dimensions Row -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4" id="dimensions-cards-container">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 mt-6" id="dimensions-cards-container">
       <div id="dim-resultado"></div>
       <div id="dim-gestao"></div>
       <div id="dim-desenvolvimento"></div>
@@ -188,6 +253,21 @@ function renderWorkspace() {
   renderProfileCard(leader, isYearDestaque);
   renderHealthScore(leader.scoreGeral, leader.scoresPorDimensao);
   renderPotencialCard(leader);
+
+  // Render Retention Radar Card
+  const radarContainer = document.getElementById('retention-radar-container');
+  if (radarContainer) {
+    radarContainer.innerHTML = renderRetentionRadarCard(state.alerts, state.selectedLeaderId, state.selectedProfile);
+    
+    // Bind detail buttons inside the radar card
+    radarContainer.querySelectorAll('.btn-detail-alert').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const alertId = btn.getAttribute('data-alert-id');
+        showAlertDetailModal(alertId, state.alerts, state.selectedProfile);
+      });
+    });
+  }
 
   // Map and Render Dimension Cards
   const dimensions = [
@@ -225,10 +305,14 @@ function renderWorkspace() {
 
     const score = leader.scoresPorDimensao[dim.id];
     
+    // Get worst alert severity for the pillar
+    const pillarAlerts = state.alerts.filter(a => a.leaderId === state.selectedLeaderId && a.status === 'Ativo' && a.pillar === dim.title);
+    const worstSeverity = getPillarWorstSeverity(pillarAlerts);
+    
     if (isExpanded) {
       const rawIndicators = state.indicators[dim.id] || [];
       const processedIndicators = mapIndicatorsValues(rawIndicators, team, leader, journey);
-      wrapper.innerHTML = renderDimensionExpandedCard(dim.id, dim.title, dim.color, processedIndicators, score, showRiscoSensitive);
+      wrapper.innerHTML = renderDimensionExpandedCard(dim.id, dim.title, dim.color, processedIndicators, score, showRiscoSensitive, worstSeverity);
       
       // Bind navigate event inside expanded card
       wrapper.querySelector('.modal-navigate-btn').addEventListener('click', (e) => {
@@ -246,7 +330,7 @@ function renderWorkspace() {
         renderCardState(dim, false);
       });
     } else {
-      wrapper.innerHTML = renderDimensionSummaryCard(dim.id, dim.title, dim.color, score);
+      wrapper.innerHTML = renderDimensionSummaryCard(dim.id, dim.title, dim.color, score, worstSeverity);
       
       // Bind expand event inside summary card
       wrapper.querySelector('.dimension-summary-card').addEventListener('click', (e) => {
@@ -411,7 +495,8 @@ function handleActions(actionName, file) {
       leaders: state.leaders,
       team: state.team,
       journey: state.journey,
-      indicators: state.indicators
+      indicators: state.indicators,
+      alerts: state.alerts
     };
     const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -436,6 +521,7 @@ function handleActions(actionName, file) {
           state.team = db.team;
           state.journey = db.journey;
           state.indicators = db.indicators;
+          state.alerts = db.alerts || [];
           
           saveToLocalStorage();
           alert('Dados importados com sucesso!');
