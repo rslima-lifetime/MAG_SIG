@@ -269,7 +269,9 @@ function parseMarkdown(text) {
 }
 
 function parseBold(text) {
-  return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
+  let processed = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
+  processed = processed.replace(/\*(.*?)\*/g, '<em class="italic text-slate-500">$1</em>');
+  return processed;
 }
 
 /**
