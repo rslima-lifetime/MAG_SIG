@@ -227,9 +227,6 @@ function renderWorkspace() {
       <div class="lg:col-span-3" id="potencial-card-container"></div>
     </div>
     
-    <!-- Retention Radar Row -->
-    <div class="mt-6" id="retention-radar-container"></div>
-    
     <!-- Main 5 Dimensions Row -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 mt-6" id="dimensions-cards-container">
       <div id="dim-resultado"></div>
@@ -240,12 +237,15 @@ function renderWorkspace() {
     </div>
     
     <!-- Bottom History, Achievements, Feedback row -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
       <div id="historical-table-container"></div>
       <div id="other-indicators-container"></div>
       <div id="latest-achievements-container"></div>
       <div id="hr-feedback-container"></div>
     </div>
+
+    <!-- Retention Radar Row -->
+    <div class="mt-6" id="retention-radar-container"></div>
   `;
 
   // Render profile, health score, potential cards
