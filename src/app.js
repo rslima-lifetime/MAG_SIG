@@ -20,6 +20,7 @@ import {
 } from './components/Tables.js';
 import { renderTeamAndJourney } from './components/Timeline.js';
 import { renderRetentionRadarCard, renderRetentionAlertList, showAlertDetailModal } from './components/RetentionRadar.js';
+import { initChatAgent } from './components/ChatAgent.js';
 
 // Application State
 let state = {
@@ -33,6 +34,8 @@ let state = {
   selectedProfile: 'RH',
   activeTab: 'overview'
 };
+
+let chatAgentInstance = null;
 
 /**
  * Load data from localStorage or fetch standard JSON files
@@ -473,6 +476,10 @@ function renderApp() {
     
     renderHeader(state.leaders, state.selectedLeaderId, state.referencePeriod, state.selectedProfile, handleFilterChange, handleActionsCall);
     renderWorkspace();
+    
+    if (chatAgentInstance) {
+      chatAgentInstance.onStateUpdate(state);
+    }
   };
 
   const handleActionsCall = (actionName, file) => {
@@ -526,6 +533,9 @@ function handleActions(actionName, file) {
           saveToLocalStorage();
           alert('Dados importados com sucesso!');
           renderApp();
+          if (chatAgentInstance) {
+            chatAgentInstance.onStateUpdate(state);
+          }
         } else {
           alert('Erro: A estrutura do JSON importado é inválida. Certifique-se de que é um arquivo gerado pela exportação do SIG.');
         }
@@ -610,4 +620,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   await removeLogoBackground();
   await initDatabase();
   renderApp();
+  
+  // Inicializa o Chat Agent
+  chatAgentInstance = initChatAgent(state, (leaderId) => {
+    state.selectedLeaderId = leaderId;
+    renderApp();
+    if (chatAgentInstance) {
+      chatAgentInstance.onStateUpdate(state);
+    }
+  });
 });
