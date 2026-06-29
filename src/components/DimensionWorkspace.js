@@ -478,7 +478,6 @@ export function renderDimensionWorkspace(container, dimensionKey, state, onIndic
     return `
       <button class="indicator-tab-btn text-left w-full p-4 border-b border-slate-100 transition-all ${borderClass} flex items-center justify-between" data-indicator-id="${ind.id}">
         <div class="min-w-0 pr-2">
-          <span class="text-xs uppercase text-slate-400 font-bold tracking-wider block">ID ${ind.id}</span>
           <span class="text-xs md:text-sm ${textClass} block truncate mt-0.5">${ind.nome}</span>
           <span class="text-xs font-semibold text-slate-500 mt-1 block">${ind.valor}</span>
         </div>
@@ -598,8 +597,7 @@ export function renderDimensionWorkspace(container, dimensionKey, state, onIndic
           <div class="p-6 border-b border-slate-100 bg-slate-50/50 shrink-0">
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
               <div>
-                <span class="text-[10px] uppercase bg-${colorClass}-100 text-${colorClass}-700 px-2 py-0.5 rounded font-bold border border-${colorClass}-200/50 inline-block">ID ${selectedInd.id}</span>
-                <h3 class="text-base font-black text-slate-800 mt-2">${details.title}</h3>
+                <h3 class="text-base font-black text-slate-800 mt-1">${details.title}</h3>
                 <p class="text-xs text-slate-400 mt-1 font-semibold">Fonte de Dados: <span class="text-slate-600 font-bold">${details.source}</span></p>
               </div>
               <div class="text-left md:text-right shrink-0">
